@@ -320,7 +320,18 @@ let
                 # cannot be used with systemd timers (see `man systemd.timer`),
                 # which is why `simple` with a loop is the best choice here.
                 # It also makes starting and stopping easiest.
+                #
+                # Retry even after "Name or service not known" dns failures:
+                Restart = "on-failure";
+                RestartSec = "${toString peer.dynamicEndpointRefreshSeconds}";
               };
+        unitConfig =
+          if !dynamicRefreshEnabled
+            then {}
+          else
+            {
+              StartLimitIntervalSec = 0;
+            };
 
         script = let
           wg_setup = concatStringsSep " " (
