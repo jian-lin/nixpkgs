@@ -322,8 +322,8 @@ let
                 # It also makes starting and stopping easiest.
                 #
                 # Retry even after "Name or service not known" dns failures:
-                Restart = "on-failure";
-                RestartSec = "${toString peer.dynamicEndpointRefreshSeconds}";
+                Restart = "always";
+                RestartSec = "1";
               };
         unitConfig =
           if !dynamicRefreshEnabled
