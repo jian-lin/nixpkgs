@@ -8,6 +8,13 @@ in
 {
   options.services.dendrite = {
     enable = lib.mkEnableOption "matrix.org dendrite";
+    ip = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = ''
+        The IP to listen for HTTP(s) requests on. Default to all IPs.
+      '';
+    };
     httpPort = lib.mkOption {
       type = lib.types.nullOr lib.types.port;
       default = 8008;
@@ -271,9 +278,9 @@ in
           "${pkgs.dendrite}/bin/dendrite-monolith-server"
           "--config /run/dendrite/dendrite.yaml"
         ] ++ lib.optionals (cfg.httpPort != null) [
-          "--http-bind-address :${builtins.toString cfg.httpPort}"
+          "--http-bind-address ${cfg.ip}:${builtins.toString cfg.httpPort}"
         ] ++ lib.optionals (cfg.httpsPort != null) [
-          "--https-bind-address :${builtins.toString cfg.httpsPort}"
+          "--https-bind-address ${cfg.ip}:${builtins.toString cfg.httpsPort}"
           "--tls-cert ${cfg.tlsCert}"
           "--tls-key ${cfg.tlsKey}"
         ] ++ lib.optionals cfg.openRegistration [
