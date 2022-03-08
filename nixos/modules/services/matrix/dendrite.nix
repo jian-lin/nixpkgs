@@ -288,9 +288,9 @@ in
           "${pkgs.dendrite}/bin/dendrite-monolith-server"
           "--config /run/dendrite/dendrite.yaml"
         ] ++ lib.optionals (cfg.httpPort != null) [
-          "--http-bind-address :${builtins.toString cfg.httpPort}"
+          "--http-bind-address ${cfg.ip}:${builtins.toString cfg.httpPort}"
         ] ++ lib.optionals (cfg.httpsPort != null) [
-          "--https-bind-address :${builtins.toString cfg.httpsPort}"
+          "--https-bind-address ${cfg.ip}:${builtins.toString cfg.httpsPort}"
           "--tls-cert ${cfg.tlsCert}"
           "--tls-key ${cfg.tlsKey}"
         ] ++ lib.optionals cfg.openRegistration [
