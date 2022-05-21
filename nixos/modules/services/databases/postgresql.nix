@@ -343,6 +343,11 @@ in
         preStart =
           ''
             if ! test -e ${cfg.dataDir}/PG_VERSION; then
+              # disable cow (and thus disable compression) on btrfs
+              # probably boost performace
+              mkdir -p ${cfg.dataDir}
+              ${pkgs.e2fsprogs}/bin/chattr +C ${cfg.dataDir}
+
               # Cleanup the data directory.
               rm -f ${cfg.dataDir}/*.conf
 
