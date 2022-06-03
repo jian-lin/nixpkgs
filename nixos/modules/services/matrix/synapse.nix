@@ -755,8 +755,10 @@ in {
         Group = "matrix-synapse";
         WorkingDirectory = cfg.dataDir;
         ExecStartPre = [ ("+" + (pkgs.writeShellScript "matrix-synapse-fix-permissions" ''
-          chown matrix-synapse:matrix-synapse ${cfg.dataDir}/homeserver.signing.key
-          chmod 0600 ${cfg.dataDir}/homeserver.signing.key
+          if [[ -f ${cfg.dataDir}/homeserver.signing.key ]]; then
+            chown matrix-synapse:matrix-synapse ${cfg.dataDir}/homeserver.signing.key
+            chmod 0600 ${cfg.dataDir}/homeserver.signing.key
+          fi
         '')) ];
         ExecStart = ''
           ${cfg.package}/bin/synapse_homeserver \
