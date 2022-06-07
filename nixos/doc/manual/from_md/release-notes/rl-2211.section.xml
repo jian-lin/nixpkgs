@@ -100,6 +100,15 @@
       </listitem>
       <listitem>
         <para>
+          Emacs enables native compilation by default. But
+          asynchronously deferred native compilation is disabled. Users
+          can set
+          <literal>(setq native-comp-deferred-compilation t)</literal>
+          to enable it.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
           Matrix Synapse now requires entries in the
           <literal>state_group_edges</literal> table to be unique, in
           order to prevent accidentally introducing duplicate
