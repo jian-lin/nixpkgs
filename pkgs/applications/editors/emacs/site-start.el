@@ -53,6 +53,9 @@ least specific (the system profile)"
                         (nix--profile-paths))
                 native-comp-eln-load-path)))
 
+;;; Disable asynchronously deferred native-comp by default
+(setq native-comp-deferred-compilation nil)
+
 ;;; Make `woman' find the man pages
 (defvar woman-manpath)
 (eval-after-load 'woman
