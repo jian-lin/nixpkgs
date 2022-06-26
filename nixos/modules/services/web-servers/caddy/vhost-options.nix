@@ -48,12 +48,8 @@ in
 
     logFormat = mkOption {
       type = types.lines;
-      default = ''
-        output file ${cfg.logDir}/access-${config.hostName}.log
-      '';
-      defaultText = ''
-        output file ''${config.services.caddy.logDir}/access-''${hostName}.log
-      '';
+      default = "";
+      defaultText = "";
       example = literalExpression ''
         mkForce '''
           output discard
