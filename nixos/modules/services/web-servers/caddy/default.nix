@@ -308,7 +308,6 @@ in
         StateDirectory = mkIf (cfg.dataDir == "/var/lib/caddy") [ "caddy" ];
         LogsDirectory = mkIf (cfg.logDir == "/var/log/caddy") [ "caddy" ];
         Restart = "on-abnormal";
-        SupplementaryGroups = mkIf (length acmeVHosts != 0) [ "acme" ];
 
         # TODO: attempt to upstream these options
         NoNewPrivileges = true;
