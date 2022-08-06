@@ -224,6 +224,15 @@ in
               '';
             };
           };
+          device_database = {
+            connection_string = lib.mkOption {
+              type = lib.types.str;
+              default = "file:userapi_devices.db";
+              description = lib.mdDoc ''
+                Database for the User API, devices.
+              '';
+            };
+          };
         };
         options.mscs = {
           database = {
