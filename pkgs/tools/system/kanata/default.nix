@@ -1,4 +1,5 @@
 { fetchFromGitHub
+, fetchpatch
 , lib
 , rustPlatform
 , withCmd ? false
@@ -6,16 +7,24 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "kanata";
-  version = "1.0.7";
+  version = "unstable-2022-08-25";
 
   src = fetchFromGitHub {
     owner = "jtroo";
     repo = pname;
-    rev = "v${version}";
-    sha256 = "sha256-2gGFAz0zXea+27T4ayDj6KdoI0ThwXV7U0CspHduTiQ=";
+    rev = "aa8298dbec140d68ca8bf182ff5ed43f50071402";
+    hash = "sha256-hCG4bzU3shPtxnLP6mHzUYCFaciU0T7RQxEbERip7Gk=";
   };
 
-  cargoHash = "sha256-0NvZATdPABIboL5xvmBmDbqPPWvO4mM6wVB3FrOVHIQ=";
+  cargoHash = "sha256-jBiNEPZzgN3d0egj88G0+S+APlzDbX3N6DYh7FF/I14=";
+
+  cargoPatches = [
+    (fetchpatch {
+      name = "fix-high-cpu-usage.patch";
+      url = "https://github.com/jtroo/kanata/pull/114.patch";
+      hash = "sha256-ItUX6qsRRiIKOcxoRBAZ7S+Frc+fbOAG/cb8JLNlYeg=";
+    })
+  ];
 
   buildFeatures = lib.optional withCmd "cmd";
 
