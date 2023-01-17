@@ -23,8 +23,18 @@ rec {
   # Official Unix Drivers - https://www.nvidia.com/en-us/drivers/unix/
   # Branch/Maturity data - http://people.freedesktop.org/~aplattner/nvidia-versions.txt
 
+  # backlight control is broken in v525, someone[1] says v515 is fine
+  # [1]: https://forums.developer.nvidia.com/t/brightness-on-a-lenovo-thinkpad-p52-no-longer-controllable-after-updating-nvidia-drivers-to-525-xx-series/236008/4
+  v515 = generic {
+    version = "515.86.01";
+    sha256_64bit = "sha256-FBd34covEel9jTMmAhPxvjJ+tzkiriL03atAS7LvRmQ=";
+    openSha256 = "sha256-9QVq6eN+usbzMb0hYvAFPlyr6MDYHvgWPz2orm+5QFc=";
+    settingsSha256 = "sha256-I8CE4EywZrsqzEy7plEG3bNfzTiT+vZJ1sqEQBrtLUQ=";
+    persistencedSha256 = "sha256-vjn315k7i16U1NjY3EB0pw6sLddEcnKaT9CrHOCY268=";
+  };
+
   # Policy: use the highest stable version as the default (on our master).
-  stable = if stdenv.hostPlatform.system == "i686-linux" then legacy_390 else latest;
+  stable = if stdenv.hostPlatform.system == "i686-linux" then legacy_390 else v515;
 
   production = generic {
     version = "535.86.05";
