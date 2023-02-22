@@ -29,6 +29,11 @@ rustPlatform.buildRustPackage rec {
       url = "https://github.com/jtroo/kanata/commit/c46e0ec88344e4adda5f7cf35fea288eb0d2203a.patch";
       hash = "sha256-ZR9iwr/V9Vplp1+Ubdpls8C0AAI0V5uebx2BibpdxoE=";
     })
+    (fetchpatch {
+      name = "release-lock-before-sleeping.patch";
+      url = "https://github.com/jtroo/kanata/commit/321c9a6f89a23306c1d4517ddb0c87f1822a4638.patch";
+      hash = "sha256-dh4NraIli2f6wMcnSH2M/s5XBQoPKaOVYeQ/qgOihpE=";
+    })
   ];
 
   buildFeatures = lib.optional withCmd "cmd";
