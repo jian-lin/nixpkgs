@@ -7,34 +7,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "kanata";
-  version = "1.2.0";
+  version = "unstable-2023-02-25";
 
   src = fetchFromGitHub {
     owner = "jtroo";
     repo = pname;
-    rev = "v${version}";
-    sha256 = "sha256-mQSbsJ+3mKoDMg0ewwR7UvXUq+5WA9aTPKWCaTz8nDE=";
+    rev = "010b52b2214019e990024a89bab2351544667042";
+    sha256 = "sha256-GfLRpEO1ryI+eZCXpsW5OWSBEk3fV4G76EgIKxC9wec=";
   };
 
-  cargoHash = "sha256-iLd30aLEIJLYdtsh10KOcoi2+yXZc07Oh9yW1g3EvEo=";
-
-  cargoPatches = [
-    (fetchpatch {
-      name = "serialize-cfg-parsing-tests-for-1.2.0.patch";
-      url = "https://github.com/jtroo/kanata/commit/9ef1e80fbcb40402262e08bd9196d000f73f686d.patch";
-      hash = "sha256-/FhyaYx4usDjGoVfRktf9dtwjY4oXdMQKqxLz00/NPY=";
-    })
-    (fetchpatch {
-      name = "notify-systemd-when-kanata-has-finished-starting-up-for-1.2.0.patch";
-      url = "https://github.com/jtroo/kanata/commit/c46e0ec88344e4adda5f7cf35fea288eb0d2203a.patch";
-      hash = "sha256-ZR9iwr/V9Vplp1+Ubdpls8C0AAI0V5uebx2BibpdxoE=";
-    })
-    (fetchpatch {
-      name = "release-lock-before-sleeping.patch";
-      url = "https://github.com/jtroo/kanata/commit/321c9a6f89a23306c1d4517ddb0c87f1822a4638.patch";
-      hash = "sha256-dh4NraIli2f6wMcnSH2M/s5XBQoPKaOVYeQ/qgOihpE=";
-    })
-  ];
+  cargoHash = "sha256-tiMNoP0JBlUwSa9SrTVcEqgsMUpJf9hpZKyi5v007jk=";
 
   buildFeatures = lib.optional withCmd "cmd";
 
