@@ -7,18 +7,22 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "kanata";
-  version = "unstable-2023-02-25";
+  version = "unstable-2023-02-26";
 
   src = fetchFromGitHub {
     owner = "jtroo";
     repo = pname;
-    rev = "010b52b2214019e990024a89bab2351544667042";
-    sha256 = "sha256-GfLRpEO1ryI+eZCXpsW5OWSBEk3fV4G76EgIKxC9wec=";
+    rev = "2223279c01f88442b39bfc1220916286eec3e2e0";
+    sha256 = "sha256-46IMeb/hj4i+NFwIQCqaJKzAydeyMbTfSNz2tn1nPAY=";
   };
 
-  cargoHash = "sha256-tiMNoP0JBlUwSa9SrTVcEqgsMUpJf9hpZKyi5v007jk=";
+  cargoHash = "sha256-gUaBaWxt5G6R/+KnXMa+7U2E1AYLT2tWVHqft8zqCRc=";
 
   buildFeatures = lib.optional withCmd "cmd";
+
+  postInstall = ''
+    install -D assets/kanata-icon.svg $out/share/icons/hicolor/scalable/apps/kanata.svg
+  '';
 
   meta = with lib; {
     description = "A tool to improve keyboard comfort and usability with advanced customization";
