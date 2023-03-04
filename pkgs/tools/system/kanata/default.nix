@@ -21,7 +21,7 @@ rustPlatform.buildRustPackage rec {
   buildFeatures = lib.optional withCmd "cmd";
 
   postInstall = ''
-    install -D assets/kanata-icon.svg $out/share/icons/hicolor/scalable/apps/kanata.svg
+    install -Dm 444 assets/kanata-icon.svg $out/share/icons/hicolor/scalable/apps/kanata.svg
   '';
 
   meta = with lib; {
