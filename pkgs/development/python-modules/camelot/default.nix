@@ -13,6 +13,7 @@
 , pdfminer
 , pypdf
 , opencv3
+, ghostscript
 }:
 
 buildPythonPackage rec {
@@ -37,6 +38,7 @@ buildPythonPackage rec {
     openpyxl
     pypdf
     opencv3
+    ghostscript
   ];
 
   doCheck = false;
