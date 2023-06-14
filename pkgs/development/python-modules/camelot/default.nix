@@ -28,6 +28,10 @@ buildPythonPackage rec {
     hash = "sha256-l6fZBtaF5AWaSlSaY646UfCrcqPIJlV/hEPGWhGB3+Y=";
   };
 
+  patches = [
+    ./remove-runtime-check-for-libgs.patch
+  ];
+
   propagatedBuildInputs = [
     charset-normalizer
     chardet
