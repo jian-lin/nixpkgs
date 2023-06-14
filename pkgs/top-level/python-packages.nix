@@ -5020,6 +5020,10 @@ self: super: with self; {
 
   ghdiff = callPackage ../development/python-modules/ghdiff { };
 
+  ghostscript = callPackage ../development/python-modules/ghostscript {
+    inherit (pkgs) ghostscript;
+  };
+
   ghp-import = callPackage ../development/python-modules/ghp-import { };
 
   ghrepo-stats = callPackage ../development/python-modules/ghrepo-stats { };
