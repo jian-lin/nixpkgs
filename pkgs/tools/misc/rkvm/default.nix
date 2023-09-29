@@ -5,6 +5,7 @@
 , libevdev
 , openssl
 , makeWrapper
+, fetchpatch
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -19,6 +20,14 @@ rustPlatform.buildRustPackage rec {
   };
 
   cargoHash = "sha256-cIHgsV6bwWWKjtFHswp641R3r5WugYW8T4xvTS2cZ1Q=";
+
+  patches = [
+    (fetchpatch {
+      name = "ignore-busy-devices.patch";
+      url = "https://github.com/htrefil/rkvm/commit/39d3a2ecea9deb78ec05c33bd280893aa40039ae.patch";
+      hash = "sha256-M4OaR7YF8pjwFyJ95dX4E/MkqNKjUh7WGCzY1osJm3o=";
+    })
+  ];
 
   nativeBuildInputs = [ pkg-config rustPlatform.bindgenHook makeWrapper ];
   buildInputs = [ libevdev ];
