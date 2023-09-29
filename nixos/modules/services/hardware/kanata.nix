@@ -110,6 +110,7 @@ let
   };
 
   mkService = name: keyboard: nameValuePair (mkName name) {
+    before = optional config.services.rkvm.client.enable "rkvm-client.service" ++ optional config.services.rkvm.server.enable "rkvm-server.service";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "notify";
