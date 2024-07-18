@@ -1,8 +1,6 @@
 {
-  lib,
   callPackage,
   f,
-  lspce,
   markdown-mode,
   melpaBuild,
   yasnippet,
@@ -10,20 +8,21 @@
 
 let
   lspce-module = callPackage ./module.nix { };
-  self = melpaBuild {
-    pname = "lspce";
-    inherit (lspce-module) version src meta;
-
-    packageRequires = [
-      f
-      lspce-module
-      markdown-mode
-      yasnippet
-    ];
-
-    passthru = {
-      inherit lspce-module;
-    };
-  };
 in
-self
+melpaBuild {
+  pname = "lspce";
+  inherit (lspce-module) version src meta;
+
+  packageRequires = [
+    f
+    markdown-mode
+    yasnippet
+  ];
+
+  # to compile lspce.el, it needs lspce-module.so
+  files = ''(:defaults "${lspce-module}/lib/lspce-module.*")'';
+
+  passthru = {
+    inherit lspce-module;
+  };
+}
