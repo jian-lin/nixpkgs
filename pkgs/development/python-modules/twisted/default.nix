@@ -109,10 +109,6 @@ buildPythonPackage rec {
             "MulticastTests.test_multicast"
             "MulticastTests.test_multiListen"
           ];
-          "src/twisted/internet/test/test_unix.py" = [
-            # flaky?
-            "UNIXTestsBuilder.test_sendFileDescriptorTriggersPauseProducing"
-          ];
         }
         // lib.optionalAttrs (pythonAtLeast "3.12") {
           "src/twisted/trial/_dist/test/test_workerreporter.py" = [
